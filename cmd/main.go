@@ -20,7 +20,7 @@ func main() {
 	geocodingResponse, err := apiClient.GetCityInformation(args[1])
 
 	if err != nil {
-		fmt.Printf("an error occurred: %s", err.Error())
+		fmt.Printf("an error occurred: %v \n", err)
 		return
 	}
 
