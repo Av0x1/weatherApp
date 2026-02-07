@@ -24,6 +24,11 @@ func main() {
 		return
 	}
 
+	if len(geocodingResponse.Results) == 0 {
+		fmt.Printf("No city was found.")
+		return
+	}
+
 	cityInformation := geocodingResponse.Results[0]
 
 	fmt.Printf("Stadt: %s (ID: %d). Längengrad: %f. Breitengrad: %f \n", cityInformation.Name, cityInformation.Id, cityInformation.Longitude, cityInformation.Latitude)

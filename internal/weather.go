@@ -40,6 +40,11 @@ type CityInformation struct {
 	Longitude float64 `json:"longitude"`
 }
 
+type ErrorResponse struct {
+	Error  bool   `json:"error"`
+	Reason string `json:"reason"`
+}
+
 func (c *ApiClient) GetCityInformation(cityName string) (geocodingResponse *GeocodingResponse, err error) {
 	params := url.Values{}
 	params.Add("name", cityName)
@@ -83,7 +88,13 @@ func (c *ApiClient) fetch(baseUri string, endpoint string, params url.Values, ta
 	defer response.Body.Close()
 
 	if response.StatusCode != http.StatusOK {
-		return fmt.Errorf("error: StatusCode: %d", response.StatusCode)
+		var errorResponse ErrorResponse
+
+		if err = decodeResult(response.Body, &errorResponse); err == nil && errorResponse.Reason != "" {
+			return fmt.Errorf("API error (%d): %s", response.StatusCode, errorResponse.Reason)
+		}
+
+		return fmt.Errorf("request failed with status %d", response.StatusCode)
 	}
 
 	return decodeResult(response.Body, target)
