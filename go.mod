@@ -1,3 +1,3 @@
-module weatherAppV1
+module weatherApp
 
 go 1.25

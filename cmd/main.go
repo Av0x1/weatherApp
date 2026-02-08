@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"weatherAppV1/internal"
+	"weatherApp/internal"
 )
 
 func main() {
