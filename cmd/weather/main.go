@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"weatherApp/internal"
+	"weatherApp/internal/weather"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 		return
 	}
 
-	apiClient := internal.NewApiClient()
+	apiClient := weather.NewApiClient()
 
 	geocodingResponse, err := apiClient.GetCityInformation(args[1])
 

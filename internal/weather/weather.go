@@ -1,4 +1,4 @@
-package internal
+package weather
 
 import (
 	"encoding/json"
